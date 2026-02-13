@@ -160,7 +160,26 @@ Not everything needs to change. Keep:
 
 When rewriting:
 1. Rewrite the full content with changes applied
-2. After the rewrite, provide a brief summary of what you changed and why (5-8 bullet points max)
+2. After the rewrite, add a **Changes** section with a short, scannable summary. Format it as a table:
+
+```
+### Changes
+
+| Pass | What changed | Examples |
+|---|---|---|
+| Structure | Collapsed parallel lists into prose | Sections 1, 4, 6 |
+| Vocabulary | Cut "navigating" (×3), "journey" (×2) | → "deal with," "transition" |
+| Rhythm | Added short punchy lines, varied length | "Full stop." "That changes the math." |
+| Hedging | Removed 3 filler starters | "It's worth noting..." deleted |
+| Texture | Added lived-in details | "stare at the ceiling" |
+| Transitions | Replaced 2 generic connectors | "Moreover" → dropped |
+```
+
+Rules for the table:
+- Only include passes where you actually made changes (skip passes with nothing to report)
+- "What changed" column: one short phrase, no full sentences
+- "Examples" column: show a specific before→after or quote a short addition
+- Keep it tight. If it needs more than 6-7 rows, you changed too much or you're over-explaining.
 
 When reviewing without rewriting (if asked):
 1. Flag specific passages that read as AI-generated

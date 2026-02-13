@@ -25,7 +25,7 @@ npx skills add jpeggdev/humanize-writing
 ### Via npm
 
 ```
-npm install -g @jpegg/humanize-writing
+npm install -g @jpeggdev/humanize-writing
 ```
 
 The postinstall script copies the skill files to `~/.claude/skills/humanize-writing/` (and equivalent directories for Cursor and Windsurf).
@@ -43,7 +43,7 @@ Once installed, the skill activates automatically in Claude Code when you say th
 ## Uninstall
 
 ```
-npm uninstall -g @jpegg/humanize-writing
+npm uninstall -g @jpeggdev/humanize-writing
 ```
 
 This removes the skill files from all agent skill directories.
