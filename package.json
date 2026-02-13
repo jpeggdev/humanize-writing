@@ -1,6 +1,6 @@
 {
   "name": "@jpeggdev/humanize-writing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Claude Code skill that rewrites AI-generated content to sound human. Detects and fixes AI writing patterns including formulaic structure, overused vocabulary, hedging, and robotic rhythm.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jpeggdev/humanize-writing"
+    "url": "git+https://github.com/jpeggdev/humanize-writing.git"
   },
   "files": [
     "SKILL.md",
