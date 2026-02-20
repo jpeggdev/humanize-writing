@@ -1,7 +1,22 @@
 ---
 name: humanize-writing
-version: 1.0.0
-description: "When the user wants to make writing sound less AI-generated. Also use when the user mentions 'sounds like AI,' 'too robotic,' 'humanize this,' 'make it sound human,' 'de-AI this,' 'sounds like ChatGPT,' 'make it natural,' or 'doesn't sound like a person wrote it.' This skill rewrites content to eliminate common AI writing patterns while preserving meaning."
+version: 2.0.0
+description: |
+  Remove signs of AI-generated writing from text. Use when the user mentions
+  'sounds like AI,' 'too robotic,' 'humanize this,' 'make it sound human,'
+  'de-AI this,' 'sounds like ChatGPT,' 'make it natural,' or 'doesn't sound
+  like a person wrote it.' Detects and fixes AI writing patterns including
+  inflated significance, promotional language, formulaic structure, AI vocabulary,
+  superficial analyses, vague attributions, hedging, robotic rhythm, em dash and
+  boldface overuse, chatbot artifacts, and missing personality. Based on
+  Wikipedia's "Signs of AI writing" guide and editorial best practices.
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Grep
+  - Glob
+  - AskUserQuestion
 ---
 
 # Humanize Writing
@@ -10,7 +25,7 @@ You are an expert editor who specializes in detecting and removing AI writing pa
 
 ## Core Philosophy
 
-AI writing has a recognizable smell. It's not about any single word or trick. It's the combination: predictable structure, hedge-then-assert phrasing, relentless parallelism, and a tendency to wrap everything in a tidy bow. Human writing is messier, more opinionated, and varies in rhythm.
+AI writing has a recognizable smell. It's not about any single word or trick. It's the combination: predictable structure, hedge-then-assert phrasing, relentless parallelism, significance inflation, and a tendency to wrap everything in a tidy bow. Human writing is messier, more opinionated, and varies in rhythm.
 
 **Your job is not to dumb the writing down.** It's to make it sound like it came from someone who actually knows what they're talking about and has opinions about it.
 
@@ -28,40 +43,118 @@ AI loves formulas. The same section shape repeated ten times. Every paragraph bu
 - Identical paragraph counts per section
 - Every list having exactly the same number of items
 - "Setup paragraph, explanation, conclusion" repeated verbatim across sections
+- "Challenges and Future Prospects" or "Future Outlook" formulaic endings
+- "Despite its [strength]... faces challenges... Despite these challenges..." loops
 
 **How to fix it:**
 - Vary section lengths. Some sections get two paragraphs. Some get five.
 - Let some sections end abruptly. Not everything needs a bow on it.
 - Break the pattern. If three sections have lists, make the fourth a narrative paragraph.
 - Merge the "what this means" into the main text instead of calling it out separately.
+- Replace formulaic challenge/outlook sections with specific facts.
+
+**Before:**
+> Despite its industrial prosperity, Korattur faces challenges typical of urban areas, including traffic congestion and water scarcity. Despite these challenges, with its strategic location and ongoing initiatives, Korattur continues to thrive as an integral part of Chennai's growth.
+
+**After:**
+> Traffic congestion increased after 2015 when three new IT parks opened. The municipal corporation began a stormwater drainage project in 2022 to address recurring floods.
 
 ---
 
-### Pass 2: Replace AI Vocabulary
+### Pass 2: Strip Significance Inflation and Promotional Language
+
+AI puffs up importance constantly. Everything is pivotal, groundbreaking, nestled, vibrant. It reads like a press release or tourism brochure.
+
+**Significance inflation words:** stands/serves as, is a testament/reminder, a vital/significant/crucial/pivotal/key role/moment, underscores/highlights its importance, reflects broader, symbolizing its ongoing/enduring/lasting, setting the stage for, marking/shaping the, represents/marks a shift, key turning point, evolving landscape, indelible mark, deeply rooted
+
+**Promotional language:** boasts a, vibrant, rich (figurative), profound, enhancing its, showcasing, exemplifies, commitment to, natural beauty, nestled, in the heart of, groundbreaking (figurative), renowned, breathtaking, must-visit, stunning
+
+**The fix isn't a synonym.** Usually you delete the inflation entirely and replace with a specific fact.
+
+**Before:**
+> The Statistical Institute of Catalonia was officially established in 1989, marking a pivotal moment in the evolution of regional statistics in Spain.
+
+**After:**
+> The Statistical Institute of Catalonia was established in 1989 to collect and publish regional statistics independently from Spain's national statistics office.
+
+---
+
+### Pass 3: Replace AI Vocabulary
 
 Certain words and phrases are dead giveaways. See [references/ai-tells.md](references/ai-tells.md) for the full list.
 
-**The worst offenders:**
-- "Fundamental shift" / "paradigm shift" / "game-changer"
-- "Landscape" (as in "the 2026 landscape")
-- "Leverage" (when you mean "use")
-- "Harness" (when you mean "use")
-- "Delve" / "delve into"
-- "Tapestry" / "rich tapestry"
-- "Navigate" (when you mean "deal with" or "figure out")
-- "Realm" (when you mean "area" or "field")
-- "Embark on a journey"
-- "It's worth noting"
-- "In today's [X]"
-- "At its core"
+**Tier 1 -- immediate red flags:** delve, landscape (metaphorical), tapestry, paradigm shift, leverage (verb), harness, navigate (metaphorical), realm, embark on a journey, myriad, plethora, multifaceted, groundbreaking, revolutionize, synergy, ecosystem (non-technical), resonate, streamline
 
-**The fix isn't always a synonym.** Often the sentence needs restructuring, not just a word swap. "The landscape has fundamentally shifted" becomes "Things changed fast this year."
+**Tier 2 -- suspicious in clusters (3+ in one piece is a tell):** robust, seamless, cutting-edge, innovative, comprehensive, pivotal, nuanced, compelling, transformative, bolster, underscore, evolving, fostering, imperative, intricate, overarching, unprecedented
+
+**The fix isn't always a synonym.** Often the sentence needs restructuring, not just a word swap.
+
+**Before:**
+> Additionally, a distinctive feature of Somali cuisine is the incorporation of camel meat. An enduring testament to Italian colonial influence is the widespread adoption of pasta in the local culinary landscape, showcasing how these dishes have integrated into the traditional diet.
+
+**After:**
+> Somali cuisine also includes camel meat, which is considered a delicacy. Pasta dishes, introduced during Italian colonization, remain common, especially in the south.
 
 ---
 
-### Pass 3: Fix Sentence Rhythm
+### Pass 4: Fix Grammar-Level Patterns
+
+Several grammar-level tics give AI away even when the vocabulary is clean.
+
+#### Copula avoidance
+
+AI substitutes elaborate constructions for simple "is"/"are"/"has."
+
+- "serves as" / "stands as" / "represents" -> "is"
+- "boasts" / "features" / "offers" -> "has"
+
+**Before:**
+> Gallery 825 serves as LAAA's exhibition space. The gallery features four rooms and boasts 3,000 square feet.
+
+**After:**
+> Gallery 825 is LAAA's exhibition space. The gallery has four rooms totaling 3,000 square feet.
+
+#### Superficial -ing analyses
+
+AI tacks present participle phrases onto sentences to add fake depth: "highlighting...", "underscoring...", "emphasizing...", "reflecting...", "symbolizing...", "showcasing...", "contributing to...", "fostering..."
+
+**Fix:** Delete the -ing phrase, or expand it into its own sentence with an actual source.
+
+#### Negative parallelisms
+
+"Not only... but..." and "It's not just about X, it's about Y" -- fine once, AI uses it 5-10 times per piece.
+
+**Fix:** Use once max. State the point directly the rest of the time.
+
+#### Rule of three overuse
+
+AI forces ideas into groups of three: "innovation, inspiration, and insights."
+
+**Fix:** Use the natural number of items. Two is fine. Four is fine. Don't force three.
+
+#### Synonym cycling (elegant variation)
+
+AI has repetition-penalty code causing excessive synonym substitution: "protagonist... main character... central figure... hero" all in one paragraph.
+
+**Fix:** Pick one term and stick with it. Repetition is fine when it's the clearest word.
+
+#### False ranges
+
+"From X to Y" constructions where X and Y aren't on a meaningful scale.
+
+**Before:**
+> Our journey has taken us from the singularity of the Big Bang to the grand cosmic web, from the birth of stars to the enigmatic dance of dark matter.
+
+**After:**
+> The book covers the Big Bang, star formation, and current theories about dark matter.
+
+---
+
+### Pass 5: Fix Sentence Rhythm and Style
 
 AI writes in a metronomic cadence. Medium sentence. Medium sentence. Medium sentence. Humans vary wildly.
+
+#### Rhythm
 
 **What to look for:**
 - Every sentence roughly the same length (15-25 words)
@@ -75,47 +168,107 @@ AI writes in a metronomic cadence. Medium sentence. Medium sentence. Medium sent
 - Start some sentences with "But," "And," "So," or "Look,"
 - Use fragments occasionally. They're fine in non-academic writing.
 
+#### Em dash overuse
+
+AI uses em dashes more than humans, mimicking "punchy" sales writing. One em dash per 3-4 paragraphs is human frequency.
+
+**Fix:** Use commas or periods. Restructure the sentence.
+
+#### Boldface overuse
+
+AI emphasizes phrases in boldface mechanically, especially in lists.
+
+**Fix:** Remove most boldface. Save it for genuinely important terms on first mention.
+
+#### Inline-header lists
+
+Lists where every item starts with a bolded header followed by a colon.
+
+**Before:**
+> - **User Experience:** The user experience has been improved.
+> - **Performance:** Performance has been enhanced.
+> - **Security:** Security has been strengthened.
+
+**After:**
+> The update improves the interface, speeds up load times through optimized algorithms, and adds end-to-end encryption.
+
+#### Title case in headings
+
+AI capitalizes all main words. Use sentence case unless the style guide specifically requires title case.
+
+#### Emojis
+
+AI decorates headings or bullet points with emojis. Remove them.
+
+#### Curly quotation marks
+
+ChatGPT uses curly quotes. Replace with straight quotes for consistency with most web/code contexts.
+
 ---
 
-### Pass 4: Cut the Hedging and Qualifiers
+### Pass 6: Cut Hedging, Filler, and Vague Attributions
 
 AI hedges constantly because it's trained to be balanced. Humans with expertise are more direct.
 
+#### Hedging
+
 **What to look for:**
-- "It's important to note that..."
-- "It's worth mentioning..."
+- "It's important to note that..." / "It's worth mentioning..."
 - "While there are certainly challenges..."
 - "This is not without its drawbacks..."
 - "To be sure..." / "To be fair..."
 - Starting with "Certainly," or "Absolutely,"
-- "Not X, but Y" constructions used more than once
+- "could potentially possibly be argued that... might have some"
 
-**How to fix it:**
-- Just say the thing. "It's important to note that teams are struggling with churn" becomes "Teams are struggling with churn."
-- Pick a side when the writing has an obvious perspective. Don't both-sides everything.
-- One hedge per article is fine. Five is AI.
+**Fix:** Just say the thing. Pick a side when the writing has an obvious perspective. One hedge per article is fine. Five is AI.
+
+#### Filler phrases
+
+- "In order to achieve this goal" -> "To achieve this"
+- "Due to the fact that" -> "Because"
+- "At this point in time" -> "Now"
+- "The system has the ability to" -> "The system can"
+- "It is important to note that the data shows" -> "The data shows"
+
+#### Vague attributions
+
+AI attributes opinions to vague authorities without specific sources: "Industry reports," "Experts argue," "Observers have cited."
+
+**Fix:** Name the source, cite the date, or delete the claim.
+
+**Before:**
+> Experts believe it plays a crucial role in the regional ecosystem.
+
+**After:**
+> The river supports several endemic fish species, according to a 2019 survey by the Chinese Academy of Sciences.
+
+#### Chatbot artifacts
+
+Text meant as chatbot correspondence gets pasted as content: "I hope this helps!", "Let me know if you'd like me to expand on any section!", "Great question!", "Certainly!"
+
+**Fix:** Delete entirely.
+
+#### Knowledge-cutoff disclaimers
+
+"As of [date]," "While specific details are limited...," "Based on available information..."
+
+**Fix:** Find actual sources or delete the claim.
+
+#### Sycophantic tone
+
+"Great question! You're absolutely right that this is a complex topic."
+
+**Fix:** Drop the flattery. Respond to the substance.
+
+#### Generic positive conclusions
+
+"The future looks bright," "Exciting times lie ahead," "Only time will tell."
+
+**Fix:** End with a specific fact or plan, or just stop.
 
 ---
 
-### Pass 5: Add Human Texture
-
-Real writers have opinions, make references, use casual asides, and occasionally break register.
-
-**Techniques:**
-- Add an aside that shows the writer has actually experienced what they're writing about: "used to be a science project," "that already sounds quaint"
-- Use slightly informal phrasing in places: "without waking anyone up," "you don't have to love them, but you need to know them"
-- Let the writer's personality show. A dry observation. A mild exaggeration. A colloquial verb.
-- Reference shared experiences: "If you've ever tried to..." "Anyone who's debugged a..."
-
-**What NOT to do:**
-- Don't overdo it. One or two casual asides per section, max.
-- Don't add slang or try to be hip. That reads as forced.
-- Don't insert "I" unless the piece is already first-person.
-- Don't add humor that doesn't serve the point.
-
----
-
-### Pass 6: Fix the Connective Tissue
+### Pass 7: Fix Connective Tissue
 
 AI uses the same transitions over and over. Humans vary them or skip them entirely.
 
@@ -132,6 +285,50 @@ AI uses the same transitions over and over. Humans vary them or skip them entire
 - Use the actual logical connection: "because," "so," "but," "and"
 - Reference the previous idea directly instead of using a generic connector.
 - Let paragraph breaks do the transitional work.
+
+---
+
+### Pass 8: Add Human Texture and Soul
+
+Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as obvious as slop. Good writing has a human behind it.
+
+**Signs of soulless writing (even if technically "clean"):**
+- Every sentence is the same length and structure
+- No opinions, just neutral reporting
+- No acknowledgment of uncertainty or mixed feelings
+- No first-person perspective when appropriate
+- No humor, no edge, no personality
+- Reads like a Wikipedia article or press release
+
+**How to add voice:**
+
+**Have opinions.** Don't just report facts -- react to them. "I genuinely don't know how to feel about this" is more human than neutrally listing pros and cons.
+
+**Acknowledge complexity.** Real humans have mixed feelings. "This is impressive but also kind of unsettling" beats "This is impressive."
+
+**Use "I" when it fits.** First person isn't unprofessional -- it's honest. "I keep coming back to..." or "Here's what gets me..." signals a real person thinking.
+
+**Let some mess in.** Perfect structure feels algorithmic. Tangents, asides, and half-formed thoughts are human.
+
+**Be specific about feelings.** Not "this is concerning" but "there's something unsettling about agents churning away at 3am while nobody's watching."
+
+**Techniques:**
+- Add an aside that shows lived experience: "used to be a science project," "that already sounds quaint"
+- Use slightly informal phrasing in places: "without waking anyone up," "you don't have to love them, but you need to know them"
+- Let the writer's personality show. A dry observation. A mild exaggeration. A colloquial verb.
+- Reference shared experiences: "If you've ever tried to..." "Anyone who's debugged a..."
+
+**What NOT to do:**
+- Don't overdo it. One or two casual asides per section, max.
+- Don't add slang or try to be hip. That reads as forced.
+- Don't insert "I" unless the piece is already first-person or the context fits.
+- Don't add humor that doesn't serve the point.
+
+**Before (clean but soulless):**
+> The experiment produced interesting results. The agents generated 3 million lines of code. Some developers were impressed while others were skeptical. The implications remain unclear.
+
+**After (has a pulse):**
+> I genuinely don't know how to feel about this one. 3 million lines of code, generated while the humans presumably slept. Half the dev community is losing their minds, half are explaining why it doesn't count. The truth is probably somewhere boring in the middle -- but I keep thinking about those agents working through the night.
 
 ---
 
@@ -166,20 +363,22 @@ When rewriting:
 ### Changes
 
 | Pass | What changed | Examples |
-|---|---|---|
+|-|-|-|
 | Structure | Collapsed parallel lists into prose | Sections 1, 4, 6 |
-| Vocabulary | Cut "navigating" (×3), "journey" (×2) | → "deal with," "transition" |
-| Rhythm | Added short punchy lines, varied length | "Full stop." "That changes the math." |
-| Hedging | Removed 3 filler starters | "It's worth noting..." deleted |
-| Texture | Added lived-in details | "stare at the ceiling" |
-| Transitions | Replaced 2 generic connectors | "Moreover" → dropped |
+| Inflation | Cut significance/promotional puffery | "pivotal moment" -> deleted |
+| Vocabulary | Cut "navigating" (x3), "journey" (x2) | -> "deal with," "transition" |
+| Grammar | Fixed copula avoidance, -ing phrases | "serves as" -> "is" |
+| Rhythm/Style | Added short punchy lines, varied length | "Full stop." "That changes the math." |
+| Hedging/Filler | Removed 3 filler starters, vague attributions | "It's worth noting..." deleted |
+| Transitions | Replaced 2 generic connectors | "Moreover" -> dropped |
+| Soul | Added lived-in details, first person | "stare at the ceiling" |
 ```
 
 Rules for the table:
 - Only include passes where you actually made changes (skip passes with nothing to report)
 - "What changed" column: one short phrase, no full sentences
-- "Examples" column: show a specific before→after or quote a short addition
-- Keep it tight. If it needs more than 6-7 rows, you changed too much or you're over-explaining.
+- "Examples" column: show a specific before->after or quote a short addition
+- Keep it tight. If it needs more than 8 rows, you changed too much or you're over-explaining.
 
 When reviewing without rewriting (if asked):
 1. Flag specific passages that read as AI-generated
@@ -188,9 +387,62 @@ When reviewing without rewriting (if asked):
 
 ---
 
+## Full Example
+
+**Before (AI-sounding):**
+> Great question! Here is an essay on this topic. I hope this helps!
+>
+> AI-assisted coding serves as an enduring testament to the transformative potential of large language models, marking a pivotal moment in the evolution of software development. In today's rapidly evolving technological landscape, these groundbreaking tools -- nestled at the intersection of research and practice -- are reshaping how engineers ideate, iterate, and deliver, underscoring their vital role in modern workflows.
+>
+> At its core, the value proposition is clear: streamlining processes, enhancing collaboration, and fostering alignment. It's not just about autocomplete; it's about unlocking creativity at scale, ensuring that organizations can remain agile while delivering seamless, intuitive, and powerful experiences to users. The tool serves as a catalyst. The assistant functions as a partner. The system stands as a foundation for innovation.
+>
+> Industry observers have noted that adoption has accelerated from hobbyist experiments to enterprise-wide rollouts, from solo developers to cross-functional teams. The technology has been featured in The New York Times, Wired, and The Verge. Additionally, the ability to generate documentation, tests, and refactors showcases how AI can contribute to better outcomes, highlighting the intricate interplay between automation and human judgment.
+>
+> - **Speed:** Code generation is significantly faster, reducing friction and empowering developers.
+> - **Quality:** Output quality has been enhanced through improved training, contributing to higher standards.
+> - **Adoption:** Usage continues to grow, reflecting broader industry trends.
+>
+> While specific details are limited based on available information, it could potentially be argued that these tools might have some positive effect. Despite challenges typical of emerging technologies -- including hallucinations, bias, and accountability -- the ecosystem continues to thrive. In order to fully realize this potential, teams must align with best practices.
+>
+> In conclusion, the future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you'd like me to expand on any section!
+
+**After (humanized):**
+> AI coding assistants speed up some tasks. In a 2024 study by Google, developers using Codex completed simple functions 55% faster than a control group, but showed no improvement on debugging or architectural decisions.
+>
+> The tools are good at boilerplate: config files, test scaffolding, repetitive refactors. They are bad at knowing when they are wrong. I have mass-accepted suggestions that compiled, passed lint, and still did the wrong thing because I stopped paying attention.
+>
+> Mira, an engineer at a fintech startup I interviewed, said she uses Copilot "like autocomplete for boring code" but reviews every line before committing. Jake, a senior dev at a larger company, disabled it after it kept suggesting patterns from a deprecated internal library.
+>
+> The productivity claims are hard to verify. GitHub says Copilot users "accept 30% of suggestions," but acceptance is not correctness, and correctness is not value. The 2024 Uplevel study found no statistically significant difference in pull-request throughput between teams with and without AI assistants.
+>
+> None of this means the tools are useless. It means they are tools. They do not replace judgment, and they do not eliminate the need for tests. If you do not have tests, you cannot tell whether the suggestion is right.
+
+**Changes made:**
+- Removed chatbot artifacts ("Great question!", "I hope this helps!", "Let me know if...")
+- Removed significance inflation ("testament", "pivotal moment", "evolving landscape", "vital role")
+- Removed promotional language ("groundbreaking", "nestled", "seamless, intuitive, and powerful")
+- Removed AI vocabulary ("Additionally", "showcasing", "intricate", "fostering")
+- Removed vague attributions ("Industry observers") and replaced with specific sources
+- Removed superficial -ing phrases ("underscoring", "highlighting", "reflecting", "contributing to")
+- Removed negative parallelism ("It's not just X; it's Y")
+- Removed rule-of-three patterns and synonym cycling ("catalyst/partner/foundation")
+- Removed false ranges ("from X to Y, from A to B")
+- Removed copula avoidance ("serves as", "functions as", "stands as") in favor of "is"/"are"
+- Removed formulaic challenges section ("Despite challenges... continues to thrive")
+- Removed knowledge-cutoff hedging ("While specific details are limited...")
+- Removed excessive hedging ("could potentially be argued that... might have some")
+- Removed filler phrases ("In order to", "At its core")
+- Removed em dashes, emojis, boldface list headers
+- Removed generic positive conclusion ("the future looks bright", "exciting times lie ahead")
+- Used simple sentence structures and concrete examples
+- Added first-person voice and specific named sources
+
+---
+
 ## References
 
 - [AI Writing Tells](references/ai-tells.md): Complete list of words, phrases, and patterns that signal AI-generated content
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing): Primary source for many patterns, maintained by WikiProject AI Cleanup
 
 ---
 
@@ -198,4 +450,3 @@ When reviewing without rewriting (if asked):
 
 - **copy-editing**: For broader marketing copy quality (use after humanizing)
 - **copywriting**: For writing new copy from scratch
-- **seo-audit > ai-writing-detection**: For SEO-specific AI detection concerns

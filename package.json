@@ -1,7 +1,7 @@
 {
   "name": "@jpeggdev/humanize-writing",
-  "version": "1.0.1",
-  "description": "Claude Code skill that rewrites AI-generated content to sound human. Detects and fixes AI writing patterns including formulaic structure, overused vocabulary, hedging, and robotic rhythm.",
+  "version": "2.0.0",
+  "description": "Claude Code skill that rewrites AI-generated content to sound human. Detects and fixes AI writing patterns including significance inflation, formulaic structure, AI vocabulary, grammar-level tells, robotic rhythm, hedging, and missing personality.",
   "main": "index.js",
   "scripts": {
     "postinstall": "node install-skill.js",
