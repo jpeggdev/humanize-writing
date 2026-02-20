@@ -11,9 +11,9 @@ Patterns, words, and structures that signal AI-generated content. Organized by c
 These words almost never appear in natural human writing at the frequency AI uses them.
 
 | AI Word/Phrase | Human Alternative |
-|---|---|
+|-|-|
 | Delve / delve into | Look at, dig into, explore |
-| Landscape (metaphorical) | Scene, world, space, field — or just drop it |
+| Landscape (metaphorical) | Scene, world, space, field -- or just drop it |
 | Tapestry / rich tapestry | (delete entirely) |
 | Paradigm shift | Big change, sea change |
 | Fundamental shift | Things changed, the ground moved |
@@ -32,13 +32,15 @@ These words almost never appear in natural human writing at the frequency AI use
 | Ecosystem (non-technical) | World, space, community |
 | Resonate | Connect, land, hit home |
 | Streamline | Simplify, speed up, cut steps from |
+| Testament | (delete -- just state the evidence) |
+| Enduring | Lasting, long-running |
 
 ### Tier 2: Suspicious in Clusters
 
 Fine alone, but AI uses these in combination. Three or more in one piece is a tell.
 
 | AI Word/Phrase | Human Alternative |
-|---|---|
+|-|-|
 | Robust | Strong, solid, thorough |
 | Seamless | Smooth, easy |
 | Cutting-edge | New, modern, latest |
@@ -55,7 +57,15 @@ Fine alone, but AI uses these in combination. Three or more in one piece is a te
 | Imperative | Essential, necessary, urgent |
 | Intricate | Complex, detailed |
 | Overarching | Main, broad, overall |
-| Unprecedented | (be specific — new? first? biggest?) |
+| Unprecedented | (be specific -- new? first? biggest?) |
+| Vibrant | Lively, active, busy |
+| Profound | Deep, significant |
+| Renowned | Well-known, famous |
+| Stunning | (be specific about what's impressive) |
+| Showcasing | Showing, displaying, demonstrating |
+| Exemplifies | Shows, demonstrates |
+| Garner | Get, earn, attract |
+| Valuable | Useful, helpful, worth doing |
 
 ---
 
@@ -63,38 +73,130 @@ Fine alone, but AI uses these in combination. Three or more in one piece is a te
 
 ### "It's worth..." Family
 
-- "It's worth noting that..." → Just state the thing.
-- "It's important to note..." → Just state the thing.
-- "It's crucial to understand..." → Just state the thing.
-- "It bears mentioning..." → Just state the thing.
+- "It's worth noting that..." -> Just state the thing.
+- "It's important to note..." -> Just state the thing.
+- "It's crucial to understand..." -> Just state the thing.
+- "It bears mentioning..." -> Just state the thing.
 
 ### "In today's..." Family
 
-- "In today's fast-paced world..." → (delete)
-- "In today's digital landscape..." → (delete)
-- "In today's competitive market..." → (delete)
-- "In an era of..." → (delete or be specific)
+- "In today's fast-paced world..." -> (delete)
+- "In today's digital landscape..." -> (delete)
+- "In today's competitive market..." -> (delete)
+- "In an era of..." -> (delete or be specific)
 
 ### "At its core..." Family
 
-- "At its core..." → (delete or restructure)
-- "At the end of the day..." → (delete or replace with "ultimately" if you must)
-- "When all is said and done..." → (delete)
+- "At its core..." -> (delete or restructure)
+- "At the end of the day..." -> (delete or replace with "ultimately" if you must)
+- "When all is said and done..." -> (delete)
 
 ### Hedging Starters
 
-- "While there are certainly..." → Pick a side.
-- "To be sure..." → (delete)
-- "That said..." → "But" (once per piece max)
-- "This is not without its challenges..." → Name the challenge directly.
-- "It remains to be seen..." → "We don't know yet" or (delete)
+- "While there are certainly..." -> Pick a side.
+- "To be sure..." -> (delete)
+- "That said..." -> "But" (once per piece max)
+- "This is not without its challenges..." -> Name the challenge directly.
+- "It remains to be seen..." -> "We don't know yet" or (delete)
 
 ### AI Closers
 
-- "The bottom line is..." → (just make your point)
-- "Only time will tell..." → (delete)
-- "The future is bright..." → (delete or be specific)
-- "Start your journey today" → (be specific about the action)
+- "The bottom line is..." -> (just make your point)
+- "Only time will tell..." -> (delete)
+- "The future is bright..." -> (delete or be specific)
+- "Start your journey today" -> (be specific about the action)
+- "Exciting times lie ahead" -> (delete)
+
+### Filler Phrases
+
+- "In order to" -> "To"
+- "Due to the fact that" -> "Because"
+- "At this point in time" -> "Now"
+- "In the event that" -> "If"
+- "Has the ability to" -> "Can"
+- "It is important to note that" -> (delete, just state it)
+
+### Sycophantic / Chatbot Artifacts
+
+- "Great question!" -> (delete)
+- "Certainly!" / "Absolutely!" -> (delete)
+- "I hope this helps!" -> (delete)
+- "Let me know if you'd like me to expand" -> (delete)
+- "You're absolutely right!" -> (delete)
+
+### Knowledge-Cutoff Disclaimers
+
+- "As of [date]..." -> (delete or find current source)
+- "While specific details are limited..." -> (delete or find source)
+- "Based on available information..." -> (delete)
+
+---
+
+## Significance Inflation
+
+Words and phrases that puff up importance beyond what the content warrants.
+
+| Inflation Pattern | What to do |
+|-|-|
+| "marking a pivotal moment in the evolution of" | State what happened, not its cosmic significance |
+| "stands/serves as a testament to" | Delete. State the evidence directly. |
+| "underscores/highlights its importance" | Delete. The importance should be self-evident. |
+| "reflects broader trends" | Name the specific trend or delete. |
+| "setting the stage for" | Say what actually happened next. |
+| "represents a shift" / "key turning point" | Be specific about what changed. |
+| "indelible mark" / "deeply rooted" | (delete or be specific) |
+
+---
+
+## Grammar-Level Patterns
+
+### Copula Avoidance
+
+AI substitutes elaborate verbs for "is"/"are"/"has":
+
+| AI Construction | Human Alternative |
+|-|-|
+| serves as | is |
+| stands as | is |
+| represents | is |
+| marks | is |
+| boasts | has |
+| features | has |
+| offers | has |
+
+### Superficial -ing Phrases
+
+AI tacks participle phrases onto sentences for fake depth:
+
+- "highlighting the importance of..."
+- "underscoring the need for..."
+- "emphasizing the significance of..."
+- "reflecting the broader trend..."
+- "symbolizing the community's..."
+- "showcasing how..."
+- "contributing to..."
+- "fostering a sense of..."
+- "encompassing..."
+
+**Fix:** Delete the phrase, or expand into its own sentence with an actual source.
+
+### Negative Parallelisms
+
+"Not only... but also..." and "It's not just about X, it's about Y."
+
+Fine once per piece. AI uses it 5-10 times.
+
+### Rule of Three
+
+AI forces ideas into groups of three to appear comprehensive. Use the natural number of items.
+
+### Synonym Cycling
+
+AI uses different words for the same thing to avoid repetition: "protagonist... main character... central figure... hero" all in one paragraph. Pick one term and stick with it.
+
+### False Ranges
+
+"From X to Y" where X and Y aren't on a meaningful scale. Just list the topics.
 
 ---
 
@@ -102,23 +204,15 @@ Fine alone, but AI uses these in combination. Three or more in one piece is a te
 
 ### The Formulaic Section
 
-Every section follows: Setup → Explanation → "What this means for you" / "The takeaway"
+Every section follows: Setup -> Explanation -> "What this means for you" / "The takeaway"
 
-**Fix:** Vary endings. Some sections end with a question. Some end mid-thought. Some end with a specific example. Some just stop.
+**Fix:** Vary endings. Some sections end with a question. Some end mid-thought. Some just stop.
 
 ### The Parallel List
 
 AI makes every bullet point the same grammatical structure and similar length.
 
 **Fix:** Let some bullets be short. Let some be a full sentence. Break one into a sub-list if it needs it.
-
-### The "Not X, but Y" Construction
-
-"Not by writing more code, but by orchestrating agents that do."
-
-Fine once. AI uses it 5-10 times per piece.
-
-**Fix:** Use it once, max twice. Restructure the rest.
 
 ### The Tricolon Close
 
@@ -134,9 +228,9 @@ Fine once. AI uses it 5-10 times per piece.
 
 ### The Em-Dash Epidemic
 
-AI uses em dashes — like this — constantly, often multiple times per paragraph.
+AI uses em dashes constantly, often multiple times per paragraph.
 
-**Fix:** Use periods. Use commas. Restructure the sentence. One em dash per 3-4 paragraphs is human frequency.
+**Fix:** Use periods. Use commas. One em dash per 3-4 paragraphs is human frequency.
 
 ---
 
@@ -144,7 +238,7 @@ AI uses em dashes — like this — constantly, often multiple times per paragra
 
 ### Too Balanced
 
-AI always presents both sides. Real writers with expertise pick a position and defend it. They acknowledge counter-arguments briefly, not at equal length.
+AI always presents both sides. Real writers with expertise pick a position and defend it.
 
 ### Too Positive
 
@@ -152,7 +246,7 @@ AI defaults to optimism. "Exciting developments," "tremendous opportunity," "bri
 
 ### Too Smooth
 
-AI never stumbles, pauses, or doubles back. Every transition is polished. Real writing has slight roughness — a parenthetical aside, a sentence that starts one way and pivots, a blunt statement after a complex one.
+AI never stumbles, pauses, or doubles back. Real writing has slight roughness -- a parenthetical aside, a sentence that starts one way and pivots, a blunt statement after a complex one.
 
 ### No Personality
 
@@ -176,3 +270,6 @@ Score the piece on these dimensions. 5+ hits = likely AI-generated:
 - [ ] Every list has the same number of items
 - [ ] No opinions, asides, or personality
 - [ ] Every claim is hedged with "certainly" or "to be sure"
+- [ ] Uses copula avoidance ("serves as" instead of "is") multiple times
+- [ ] Significance inflation in opening or closing paragraphs
+- [ ] Chatbot artifacts present ("I hope this helps!")
