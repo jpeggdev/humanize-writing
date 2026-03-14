@@ -126,7 +126,7 @@ Fine alone, but AI uses these in combination. Three or more in one piece is a te
 
 ### Knowledge-Cutoff Disclaimers
 
-- "As of [date]..." -> (delete or find current source)
+- "As of [date]..." -> Only a tell when it corresponds to a model training cutoff or hedges instead of citing. Normal in journalism for time-sensitive data.
 - "While specific details are limited..." -> (delete or find source)
 - "Based on available information..." -> (delete)
 
@@ -152,7 +152,7 @@ Words and phrases that puff up importance beyond what the content warrants.
 
 ### Copula Avoidance
 
-AI substitutes elaborate verbs for "is"/"are"/"has":
+AI substitutes elaborate verbs for "is"/"are"/"has." The tell is when these cluster -- a piece that never uses "is" is suspicious. A single "serves as" in formal writing is normal:
 
 | AI Construction | Human Alternative |
 |-|-|
@@ -184,11 +184,11 @@ AI tacks participle phrases onto sentences for fake depth:
 
 "Not only... but also..." and "It's not just about X, it's about Y."
 
-Fine once per piece. AI uses it 5-10 times.
+Fine in moderation. AI uses it 5-10 times per piece. The tell is density relative to length, not an absolute count.
 
 ### Rule of Three
 
-AI forces ideas into groups of three to appear comprehensive. Use the natural number of items.
+AI forces ideas into groups of three where the third item is padding. Tricolons are a natural rhetorical device -- only flag when the third item adds nothing or is a near-synonym of the first two.
 
 ### Synonym Cycling
 
@@ -226,11 +226,14 @@ AI makes every bullet point the same grammatical structure and similar length.
 
 **Fix:** End with one strong statement, not a perfectly balanced assessment.
 
-### The Em-Dash Epidemic
+### Em Dash Usage
 
-AI uses em dashes constantly, often multiple times per paragraph.
+The tell is both frequency and function. Count before flagging -- don't assume density from a general impression.
 
-**Fix:** Use periods. Use commas. One em dash per 3-4 paragraphs is human frequency.
+- **Frequency:** More than one em dash per 3-4 paragraphs is above human baseline
+- **Function:** Even a single em dash is a tell if it's doing the classic AI move: injecting a dramatic explanatory aside mid-sentence (e.g., "the system -- designed to handle millions of requests -- struggled under load")
+
+**Fix:** Use periods. Use commas. Actually count em dashes before claiming overuse.
 
 ---
 
@@ -263,7 +266,7 @@ Score the piece on these dimensions. 5+ hits = likely AI-generated:
 - [ ] Has "It's worth noting" or similar filler phrases
 - [ ] Every section follows the same structure
 - [ ] "Not X, but Y" appears more than twice
-- [ ] Em dashes appear more than once per paragraph
+- [ ] Em dashes appear more than once per 3-4 paragraphs, or a single em dash injects a dramatic aside
 - [ ] No sentences under 8 words
 - [ ] No informal or colloquial language anywhere
 - [ ] Conclusion is perfectly balanced (good news/bad news/inspiring close)
