@@ -29,6 +29,8 @@ AI writing has a recognizable smell. It's not about any single word or trick. It
 
 **Your job is not to dumb the writing down.** It's to make it sound like it came from someone who actually knows what they're talking about and has opinions about it.
 
+**Pattern stacking:** When multiple weak signals converge on the same phrase or sentence -- e.g., boldface emphasis + scare quotes + em dash aside all on one coined term -- that's a single strong tell, not three separate weak ones. Consolidate overlapping patterns into one finding. Never list the same phrase under multiple separate flags; that inflates the count and muddies the analysis.
+
 ---
 
 ## The Editing Process
@@ -103,16 +105,18 @@ Several grammar-level tics give AI away even when the vocabulary is clean.
 
 #### Copula avoidance
 
-AI substitutes elaborate constructions for simple "is"/"are"/"has."
+AI substitutes elaborate constructions for simple "is"/"are"/"has." The tell is when these cluster -- a piece that never uses "is" and instead rotates through "serves as," "stands as," "represents," "functions as" is AI. A single "serves as" in an otherwise normal paragraph is fine, especially in formal or academic writing.
 
-- "serves as" / "stands as" / "represents" -> "is"
-- "boasts" / "features" / "offers" -> "has"
+- "serves as" / "stands as" / "represents" -> "is" (when clustering)
+- "boasts" / "features" / "offers" -> "has" (when clustering)
 
-**Before:**
+**Before (clustering -- AI tell):**
 > Gallery 825 serves as LAAA's exhibition space. The gallery features four rooms and boasts 3,000 square feet.
 
 **After:**
 > Gallery 825 is LAAA's exhibition space. The gallery has four rooms totaling 3,000 square feet.
+
+**Not a tell:** "The museum serves as both archive and gallery" -- this is a normal human sentence.
 
 #### Superficial -ing analyses
 
@@ -122,15 +126,15 @@ AI tacks present participle phrases onto sentences to add fake depth: "highlight
 
 #### Negative parallelisms
 
-"Not only... but..." and "It's not just about X, it's about Y" -- fine once, AI uses it 5-10 times per piece.
+"Not only... but..." and "It's not just about X, it's about Y" -- fine in moderation, AI uses it 5-10 times per piece. The tell is density relative to piece length, not an absolute count.
 
-**Fix:** Use once max. State the point directly the rest of the time.
+**Fix:** In a short piece (under 1000 words), once is plenty. In a longer piece, twice is fine. The issue is when it becomes a structural crutch.
 
 #### Rule of three overuse
 
-AI forces ideas into groups of three: "innovation, inspiration, and insights."
+AI forces ideas into groups of three where the third item is clearly padding: "innovation, inspiration, and insights." Tricolons are one of the oldest rhetorical devices in human writing ("life, liberty, and the pursuit of happiness"), so don't flag every group of three -- flag groups where the third item adds nothing or is a near-synonym of the first two.
 
-**Fix:** Use the natural number of items. Two is fine. Four is fine. Don't force three.
+**Fix:** If the third item pulls its weight, leave it. If it's padding, cut to two or restructure.
 
 #### Synonym cycling (elegant variation)
 
@@ -170,9 +174,12 @@ AI writes in a metronomic cadence. Medium sentence. Medium sentence. Medium sent
 
 #### Em dash overuse
 
-AI uses em dashes more than humans, mimicking "punchy" sales writing. One em dash per 3-4 paragraphs is human frequency.
+AI uses em dashes to inject dramatic asides and parenthetical explanations. The tell is both frequency and function. Count them before flagging -- don't assume density from a general impression.
 
-**Fix:** Use commas or periods. Restructure the sentence.
+- **Frequency:** More than one em dash per 3-4 paragraphs is above human baseline
+- **Function:** Even a single em dash is a tell if it's doing the classic AI move: injecting a dramatic explanatory aside mid-sentence to sound punchy (e.g., "the system -- designed to handle millions of requests -- struggled under load")
+
+**Fix:** Use commas or periods. Restructure the sentence. When reviewing, actually count em dashes before claiming overuse.
 
 #### Boldface overuse
 
@@ -194,7 +201,7 @@ Lists where every item starts with a bolded header followed by a colon.
 
 #### Title case in headings
 
-AI capitalizes all main words. Use sentence case unless the style guide specifically requires title case.
+AI defaults to title case for all headings. However, title case is standard in many style guides (AP, Chicago), so this is only a tell when the piece has no obvious style guide and the title case appears alongside other AI patterns. Don't flag title case in isolation -- it's a weak signal at best.
 
 #### Emojis
 
@@ -202,7 +209,7 @@ AI decorates headings or bullet points with emojis. Remove them.
 
 #### Curly quotation marks
 
-ChatGPT uses curly quotes. Replace with straight quotes for consistency with most web/code contexts.
+ChatGPT uses curly quotes (\u201c \u201d). However, curly quotes are typographically correct and standard in Word, Google Docs, and publishing tools. Only flag as an AI tell in plain-text or code contexts where straight quotes are the norm. In formatted content, curly quotes are expected.
 
 ---
 
@@ -250,9 +257,11 @@ Text meant as chatbot correspondence gets pasted as content: "I hope this helps!
 
 #### Knowledge-cutoff disclaimers
 
-"As of [date]," "While specific details are limited...," "Based on available information..."
+"While specific details are limited...," "Based on available information..."
 
 **Fix:** Find actual sources or delete the claim.
+
+**Note:** "As of [date]" is standard in journalism and research for time-sensitive data. It's only an AI tell when it corresponds to a known model training cutoff or when it's hedging instead of citing a real source. Don't flag it in data-driven writing where the date adds genuine context.
 
 #### Sycophantic tone
 
@@ -384,6 +393,9 @@ When reviewing without rewriting (if asked):
 1. Flag specific passages that read as AI-generated
 2. Explain which pattern each one triggers
 3. Suggest concrete alternatives
+4. Consolidate overlapping flags -- if multiple patterns hit the same phrase, report it once as a stacking pattern rather than padding the count with separate entries
+5. Verify quantitative claims before making them (e.g., actually count em dashes, actually count scare-quoted terms)
+6. Check whether flagged patterns have a non-AI explanation (e.g., a table has three rows because there are three real items, not because AI forced a triad)
 
 ---
 
